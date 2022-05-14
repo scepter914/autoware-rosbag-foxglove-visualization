@@ -1,0 +1,20 @@
+#!/bin/bash
+
+VISUALIZE_SUBDIR="visualization/"
+ROSBAG_NAME="visualization"
+VISUALIZE_ROSBAG_DIR=$1$VISUALIZE_SUBDIR
+ROSBAG_PATH=$VISUALIZE_ROSBAG_DIR$ROSBAG_NAME
+mkdir -p $VISUALIZE_ROSBAG_DIR
+
+RECORDTOPIC=(
+/tf
+/tf_static
+)
+
+ALLTOPIC=""
+
+for i in ${RECORDTOPIC[@]}; do
+  ALLTOPIC="$ALLTOPIC $i"
+done
+
+ros2 bag record $ALLTOPIC -o $ROSBAG_PATH
