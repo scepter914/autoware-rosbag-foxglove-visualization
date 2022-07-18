@@ -3,7 +3,7 @@
 This repository is [autoware](https://github.com/autowarefoundation/autoware) visualization with [foxglove studio](https://github.com/foxglove/studio).
 
 ## Get started
-### Setup with autoware
+### Setup with Autoware
 
 1. Install and build Autoware according to [installation](https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/source-installation/).
   - In this case, setup at `~/autoware`
@@ -47,6 +47,9 @@ ros2 launch autoware_foxglove_studio_visualization foxglove_rosbag2_creator.xml 
 
 3. Open foxglove studio with the output rosbag2.
 
+If you need analyze in detail, you can analyze topic data by using rosbag2-api.
+You can access to topic data of rosbag2 easily by [rosbag2](https://github.com/scepter914/rosbag2-loader-py).
+
 ### Use Case 2. Visualization for comparison between component development
 
 1. Make original result rosbag as same as Use Case 1.
@@ -55,14 +58,14 @@ ros2 launch autoware_foxglove_studio_visualization foxglove_rosbag2_creator.xml 
 ros2 launch autoware_foxglove_studio_visualization foxglove_rosbag2_creator.xml -r -param :rosbag=path_to/rosbag2_2022_02_05-00_54_33/
 ```
 
-2. Make new feature or debug a package
-3. Make rosbag with new feature
+2. Develop autoware and re-build autoware
+  - Make new feature
+  - Debug a package
+  - Change parameters
+3. Run comparison_rosbag2_creator
 
 ```
-ros2 launch autoware_foxglove_studio_visualization perception_rosbag_creator.xml
+ros2 launch autoware_foxglove_studio_visualization comparison_rosbag2_creator.xml -r -param :rosbag=path_to/rosbag2_2022_02_05-00_54_33/
 ```
 
-4. Merge original result rosbag and new feature result rosbag
-  - Recommend to use <https://github.com/tier4/ros2bag_extensions>
-5. Open foxglove studio with the output rosbag2.
-
+4. Open foxglove studio with comparison topic.
