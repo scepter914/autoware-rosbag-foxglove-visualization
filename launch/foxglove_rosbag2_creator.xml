@@ -1,30 +1,35 @@
 <launch>
 
   <!-- Autoware parameters -->
-  <arg name="map_path" default="Downloads"/>
+  <arg name="map_path" default="(env MAP_PATH default)"/>
   <arg name="vehicle_model" default="$(env VEHICLE_MODEL default)"/>
   <arg name="sensor_model" default="$(env SENSOR_MODEL default)"/>
   <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
 
   <!-- Rosbag maker parameters -->
-  <arg name="shell_script_path" default="$(find-pkg-share rosbag2_record_launcher)/scripts/autoware_foxglove_studio_visualization.launch.sh" />
+  <arg name="record_script_path" default="$(find-pkg-share autoware_foxglove_studio_visualization)/scripts/rosbag_record.sh" />
+  <arg name="remap_script_path" default="$(find-pkg-share autoware_foxglove_studio_visualization)/scripts/rosbag_remap.sh" />
   <arg name="rosbag_path" default="" />
 
   <!-- Autoware launch -->
   <include file="$(find-pkg-share autoware_launch)/launch/logging_simulator.launch.xml">
+    <arg name="map_path" value="$(var map_path)"/>
+    <arg name="vehicle_model" value="$(var vehicle_mode)"/>
+    <arg name="sensor_model" value="$(var sensor_model)"/>
+    <arg name="vehicle_id" value="$(var vehicle_id)"/>
   </include>
 
   <!-- Perception visualization launch -->
-  <include file="$(find-pkg-share autoware_perception_marker_array)/launch/autoware_perception_marker_array.launch.xml">
+  <include file="$(find-pkg-share autoware_foxglove_studio_visualization)/launch/autoware_perception_marker_array.launch.xml">
   </include>
 
   <!-- Wait for autoware launch -->
   <executable cmd="sleep 20" output="screen" />
 
   <!-- Record rosbag -->
-  <executable cmd="$(var shell_script_path) (var rosbag_path)" output="screen" />
+  <executable cmd="$(var record_script_path) $(var rosbag_path)" output="screen" />
 
   <!-- play rosbag -->
-  <executable cmd="$rosbag play (var rosbag_path)" output="screen" />
+  <executable cmd="$$(var remap_script_path) (var rosbag_path)" output="screen" />
 
 </launch>
