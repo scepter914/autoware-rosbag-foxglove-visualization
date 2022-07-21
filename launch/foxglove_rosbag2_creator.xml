@@ -20,16 +20,20 @@
   </include>
 
   <!-- Perception visualization launch -->
+  <!--
   <include file="$(find-pkg-share autoware_foxglove_studio_visualization)/launch/autoware_perception_marker_array.launch.xml">
   </include>
+  -->
+
+  <!-- Record rosbag -->
+  <!--
+  <executable cmd="$(var record_script_path) $(var rosbag_path)" output="screen" />
+  -->
 
   <!-- Wait for autoware launch -->
   <executable cmd="sleep 20" output="screen" />
 
-  <!-- Record rosbag -->
-  <executable cmd="$(var record_script_path) $(var rosbag_path)" output="screen" />
-
   <!-- play rosbag -->
-  <executable cmd="$$(var remap_script_path) (var rosbag_path)" output="screen" />
+  <executable cmd="$(var remap_script_path) $(var rosbag_path)" output="screen" />
 
 </launch>
