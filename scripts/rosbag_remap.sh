@@ -3,7 +3,10 @@
 FILE_NAME=$@
 
 TOPIC_LIST=(
-/perception/*
+/perception/object_recognition/detection/objects
+/perception/object_recognition/tracking/objects
+/perception/object_recognition/objects
+/perception/object_recognition/detection/radar/front_center/objects
 )
 
 TOPIC_FILTER=""
@@ -16,3 +19,4 @@ for TOPIC in ${TOPIC_LIST[@]}; do
 done
 
 ros2 bag play $FILE_NAME --clock 200 --remap $TOPIC_FILTER
+
