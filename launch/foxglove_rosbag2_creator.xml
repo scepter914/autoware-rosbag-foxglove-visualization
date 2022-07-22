@@ -17,6 +17,9 @@
     <arg name="vehicle_model" value="$(var vehicle_mode)"/>
     <arg name="sensor_model" value="$(var sensor_model)"/>
     <arg name="vehicle_id" value="$(var vehicle_id)"/>
+    <arg name="localization" value="false"/>
+    <arg name="planning" default="false"/>
+    <arg name="control" default="false"/>
   </include>
 
   <!-- Perception visualization launch -->
@@ -25,13 +28,11 @@
   </include>
   -->
 
-  <!-- Record rosbag -->
-  <!--
-  <executable cmd="$(var record_script_path) $(var rosbag_path)" output="screen" />
-  -->
-
   <!-- Wait for autoware launch -->
   <executable cmd="sleep 20" output="screen" />
+
+  <!-- Record rosbag -->
+  <executable cmd="$(var record_script_path) $(var rosbag_path)" output="screen" />
 
   <!-- play rosbag -->
   <executable cmd="$(var remap_script_path) $(var rosbag_path)" output="screen" />
