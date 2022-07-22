@@ -1,4 +1,6 @@
 <launch>
+  <!--
   <include file="$(find-pkg-share autoware_perception_marker_array)/launch/autoware_perception_marker_array.launch.xml">
   </include>
+  -->
 </launch>
