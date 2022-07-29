@@ -1,6 +1,6 @@
-# autoware_foxglove_studio_visualization
+# autoware_rosbag_foxglove_visualization
 
-This repository is [autoware](https://github.com/autowarefoundation/autoware) visualization with [foxglove studio](https://github.com/foxglove/studio).
+This repository is rosbag from [autoware](https://github.com/autowarefoundation/autoware) visualization with [foxglove studio](https://github.com/foxglove/studio).
 
 - Supported feature
   - [x] Making rosbag2 to analyze by rosbag2-api
