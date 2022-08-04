@@ -3,7 +3,6 @@
 This repository is rosbag from [autoware](https://github.com/autowarefoundation/autoware) visualization with [foxglove studio](https://github.com/foxglove/studio).
 
 - Supported feature
-  - [x] Making rosbag2 to analyze by rosbag2-api
   - [x] Making rosbag2 to visualize pointcloud2 in foxglove
   - [ ] Making rosbag2 to visualize perception results in foxglove
 
@@ -42,15 +41,33 @@ source ~/autoware/install/setup.bash
 
 ### Visualization with foxglove studio
 
-1. Set record topic you want to visualize in [shell script example](/scripts/record_visualization_topic.sh).
-2. Launch launcher to create visualization rosbag2.
+1. Set record topic you want to visualize in [shell script example](/scripts/rosbag_record.sh).
+2. Launch visualization launcher.
+  - See [Autoware tutorials](https://autowarefoundation.github.io/autoware-documentation/main/tutorials/ad-hoc-simulation/rosbag-replay-simulation/) for paramters
 
 ```sh
-ros2 launch autoware_foxglove_studio_visualization foxglove_rosbag2_creator.xml -r -param :rosbag=path_to/rosbag2_2022_02_05-00_54_33/
+ros2 launch autoware_foxglove_studio_visualization foxglove_rosbag2_creator.xml map_path:=$HOME/Downloads/sample-map-rosbag vehicle_model:=sample_vehicle sensor_model:=sample_sensor_kit
 ```
 
-3. Open foxglove studio with the output rosbag2.
-  - In default setting, output rosbag is at `Downloads/visualization/`
+3. Run record scripts rosbag2 for visualization.
+
+```sh
+./autoware_foxglove_studio_visualization/scripts/record_and_remap.sh ~/path_to_rosbag/input_rosbag.db3
+```
+
+4. Open foxglove studio with the output rosbag2.
+
+Output files is below.
+
+```
+- ~/path_to_rosbag/
+  - input_rosbag.db3: original rosbag
+  - /visualize/{TIME}/
+    - {TIME}.db3: rosbag for visualization
+    - input_rosbag.txt 
+    - metadata.yaml
+```
+
 - Option
   - Analyze by Rosbag
     - If you need analyze in detail, you can analyze topic data by using rosbag2-api.
