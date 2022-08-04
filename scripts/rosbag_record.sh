@@ -1,22 +1,28 @@
 #!/bin/bash
 
-#ROSBAG_NAME=$(basename $1) 
-ROSBAG_NAME=$(basename $1) 
-ROSBAG_NAME_WITHOUT_EXT=${ROSBAG_NAME%.*}".txt"
+### Setting output directory ###
 
-OUTPUT_ROOT_DIR="$HOME/Downloads/"
-VISUALIZE_SUBDIR="visualization/"
+# OUTPUT_ROOT_DIR="$HOME/Downloads/"
+OUTPUT_ROOT_DIR=$(dirname $1)"/" 
+VISUALIZE_DIR=$OUTPUT_ROOT_DIR"visualization/"
 OUTPUT_NAME=$(date +%Y%m%d-%H%M%S)
 
+# Make path names
+ROSBAG_NAME=$(basename $1) 
+ROSBAG_NAME_WITHOUT_EXT=${ROSBAG_NAME%.*}".txt"
+ROSBAG_PATH=$VISUALIZE_DIR$OUTPUT_NAME
 
-ROSBAG_PATH=$OUTPUT_ROOT_DIR$VISUALIZE_SUBDIR$OUTPUT_NAME
+# TOUCH from original rosbag name
 TOUCH_PATH=$OUTPUT_ROOT_DIR$VISUALIZE_SUBDIR$OUTPUT_NAME"/"$ROSBAG_NAME_WITHOUT_EXT
 
-#mkdir -p $VISUALIZE_ROSBAG_DIR
 
+### Make record topic remap ###
+# perception debug topic
+ALLTOPIC=""
+PERCEPTION_TOPIC=$(ros2 topic list | grep --regexp="/perception/object_recognition/*")
+ALLTOPIC="$ALLTOPIC $PERCEPTION_TOPIC"
 
-
-
+# other topic
 RECORDTOPIC=(
 /tf
 /tf_static
@@ -24,17 +30,14 @@ RECORDTOPIC=(
 /sensing/lidar/concatenated/pointcloud
 )
 
-ALLTOPIC=""
-PERCEPTION_TOPIC=$(ros2 topic list | grep --regexp="/perception/object_recognition/*")
-ALLTOPIC="$ALLTOPIC $PERCEPTION_TOPIC"
-
 for i in ${RECORDTOPIC[@]}; do
   ALLTOPIC="$ALLTOPIC $i"
 done
 
+### Record rosbag2 ###
 echo $ALLTOPIC
 ros2 bag record $ALLTOPIC -o $ROSBAG_PATH
 
-# touch original rosbag path
+### Run touch command to log original rosbag path ###
 touch $TOUCH_PATH
 
