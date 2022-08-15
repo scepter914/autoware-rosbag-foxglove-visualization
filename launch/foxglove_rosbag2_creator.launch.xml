@@ -5,6 +5,7 @@
   <arg name="vehicle_model" default="$(env VEHICLE_MODEL default)"/>
   <arg name="sensor_model" default="$(env SENSOR_MODEL default)"/>
   <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
+  <arg name="rviz" default="true"/>
 
   <!-- Autoware launch -->
   <include file="$(find-pkg-share autoware_launch)/launch/logging_simulator.launch.xml">
@@ -12,6 +13,7 @@
     <arg name="vehicle_model" value="$(var vehicle_model)"/>
     <arg name="sensor_model" value="$(var sensor_model)"/>
     <arg name="vehicle_id" value="$(var vehicle_id)"/>
+    <arg name="rviz" value="$(var rviz)"/>
     <arg name="localization" value="false"/>
     <arg name="planning" value="false"/>
     <arg name="control" value="false"/>
