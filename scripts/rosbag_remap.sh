@@ -18,5 +18,5 @@ for TOPIC in ${TOPIC_LIST[@]}; do
   TOPIC_FILTER+=" "
 done
 
-ros2 bag play $FILE_NAME --clock 200 --remap $TOPIC_FILTER
+ros2 bag play $FILE_NAME --clock 200 -s sqlite3 --remap $TOPIC_FILTER
 
