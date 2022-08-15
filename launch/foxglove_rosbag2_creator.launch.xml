@@ -6,11 +6,6 @@
   <arg name="sensor_model" default="$(env SENSOR_MODEL default)"/>
   <arg name="vehicle_id" default="$(env VEHICLE_ID default)"/>
 
-  <!-- Rosbag maker parameters -->
-  <arg name="record_script_path" default="$(find-pkg-share autoware_foxglove_studio_visualization)/scripts/rosbag_record.sh" />
-  <arg name="remap_script_path" default="$(find-pkg-share autoware_foxglove_studio_visualization)/scripts/rosbag_remap.sh" />
-  <arg name="rosbag_path" default="" />
-
   <!-- Autoware launch -->
   <include file="$(find-pkg-share autoware_launch)/launch/logging_simulator.launch.xml">
     <arg name="map_path" value="$(var map_path)"/>
