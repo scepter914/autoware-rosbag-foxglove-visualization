@@ -6,7 +6,6 @@ TOPIC_LIST=(
 /perception/object_recognition/detection/objects
 /perception/object_recognition/tracking/objects
 /perception/object_recognition/objects
-/perception/object_recognition/detection/radar/front_center/objects
 )
 
 TOPIC_FILTER=""
