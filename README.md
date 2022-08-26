@@ -64,7 +64,7 @@ Output files is below.
   - input_rosbag.db3: original rosbag
   - /visualize/{TIME}/
     - {TIME}.db3: rosbag for visualization
-    - input_rosbag.txt 
+    - input_rosbag.txt
     - metadata.yaml
 ```
 
@@ -72,5 +72,3 @@ Output files is below.
   - Analyze by Rosbag
     - If you need analyze in detail, you can analyze topic data by using rosbag2-api.
     - You can access to topic data of rosbag2 easily by [rosbag2](https://github.com/scepter914/rosbag2-loader-py).
-
-

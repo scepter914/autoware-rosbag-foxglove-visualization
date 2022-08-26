@@ -18,4 +18,3 @@ for TOPIC in ${TOPIC_LIST[@]}; do
 done
 
 ros2 bag play $FILE_NAME --clock 200 -s sqlite3 --remap $TOPIC_FILTER
-
